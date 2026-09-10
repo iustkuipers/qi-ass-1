@@ -42,6 +42,22 @@ python -m venv .venv && .venv/Scripts/activate      # Windows
 pip install -r requirements.txt
 
 cd fase1
+python main.py                          # the whole pipeline, ~90 seconds
+python -m pytest tests -q               # 111 tests
+```
+
+`main.py` runs the eight steps in order and prints how long each took. To run
+part of it:
+
+```bash
+python main.py --list          # what the steps are
+python main.py --from 05       # from step 5 on, e.g. after changing mu
+python main.py --only 06       # a single step
+```
+
+Or call the steps directly, which is what `main.py` does:
+
+```bash
 python scripts/01_load_and_check.py     # data, checks, clean copies
 python scripts/02_characteristics.py    # book equity, market equity, B/M
 python scripts/03_betas.py              # pre- and post-ranking betas, Table I/II
@@ -50,12 +66,12 @@ python scripts/05_expected_returns.py   # mu
 python scripts/06_portfolio.py          # covariance, tangency portfolios
 python scripts/07_allocation.py         # y*, whole shares, the hand-in sheet
 python scripts/08_summary_numbers.py    # every headline number in one file
-
-python -m pytest tests -q               # 111 tests
 ```
 
 Each script writes a readable report to `fase1/output/` and its data to
-`fase1/data/processed/`. They run in order and each depends on the previous one.
+`fase1/data/processed/`. They run in order and each depends on the previous one,
+which is why they are separate scripts: a step that takes half a minute should
+not have to re-run because a later one changed.
 
 **The raw data is not in this repository** — see [Data](#data) below.
 
@@ -71,6 +87,7 @@ Each script writes a readable report to `fase1/output/` and its data to
 ├── S&P500_2025.txt                ticker list (public)
 │
 └── fase1/
+    ├── main.py                    runs steps 01-08 in order
     ├── config.py                  every choice that is a choice, in one place:
     │                              budget, rf, trade date, sheet layout, the
     │                              excluded PERMNOs, the weight cap, A

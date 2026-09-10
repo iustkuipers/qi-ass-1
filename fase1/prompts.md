@@ -663,6 +663,36 @@ genomen, plus de fouten die de AI in eigen werk vond.
 
 Commit `f67712c` op `main`, gepusht naar `https://github.com/iustkuipers/qi-ass-1`.
 
+### Prompt 11 — controlevraag en de ontbrekende main.py
+
+> ok thanks did you run everything
+>
+> where is main.py
+
+**Terecht gevraagd, twee keer.**
+
+1. **`main.py` ontbrak.** Wij hadden er in de allereerste prompt om gevraagd
+   (`main.py` + `modules/module1`), daarna om losse scripts 01 t/m 06, en de AI
+   heeft de scripts gebouwd maar is nooit teruggekomen op de runner. Nu
+   toegevoegd: `fase1/main.py` draait de acht stappen op volgorde en meldt hoe
+   lang elke stap duurde, met `--from`, `--only` en `--list` om een deel te
+   draaien. De volledige run duurt 90 seconden.
+2. **Niet alles was opnieuw gedraaid.** De AI had `module4_fama_macbeth.py`
+   aangepast (de 0/0-t-waarde) *nadat* script 04 voor het laatst had gedraaid.
+   In plaats van te zeggen dat het niet uitmaakte, is de hele keten opnieuw
+   gedraaid en zijn de uitkomsten vergeleken met een kopie van ervoor: alle acht
+   rapporten en `allocation.csv` zijn **byte-identiek**, en van het Excel-bestand
+   zijn alle 511 gecontroleerde cellen gelijk (het bestand zelf verschilt alleen
+   doordat openpyxl een tijdstempel meeschrijft). De aanpassing was dus inderdaad
+   een no-op op echte data, maar dat is nu aangetoond in plaats van aangenomen.
+
+**Groepsnummer.** Wij hebben zelf `GROUP = {"group": "15"}` in
+`scripts/07_allocation.py` gezet; dat staat nu in cel C2 van het ingeleverde
+sheet. De namen en studentnummers moeten er nog in.
+
+Eindcontrole na de volledige run: 111 tests groen, totaal exact
+EUR 10.000.000,00.
+
 ---
 
 *Dit bestand wordt bijgewerkt tot het moment van inleveren.*

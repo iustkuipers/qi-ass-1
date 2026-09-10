@@ -21,10 +21,14 @@ from config import (ALLOW_BORROWING, BUDGET, FASE1, HAND_IN_SHEET,  # noqa: E402
                     RISK_AVERSION_ALTERNATIVES, SHEET_SHARES_COL_PART1)
 from modules import module7_allocation as m7  # noqa: E402
 
-# Fill these in before the final submission; they go into the sheet header.
+# These go into the header of the hand-in sheet (cells C2 to C8). Any key left
+# out is simply not written, so the template's placeholder stays visible - which
+# is the reminder that it still needs filling in.
 GROUP: dict = {
-    # "group": "", "student1": "", "student1_nr": "",
-    # "student2": "", "student2_nr": "", "student3": "", "student3_nr": "",
+    "group": "15",
+    # "student1": "", "student1_nr": "",
+    # "student2": "", "student2_nr": "",
+    # "student3": "", "student3_nr": "",
 }
 
 OUT_DIR = FASE1 / "data" / "output"
