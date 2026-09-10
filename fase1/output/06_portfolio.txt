@@ -1,0 +1,151 @@
+==============================================================================
+STEP 6 - COVARIANCE AND TANGENCY PORTFOLIOS
+==============================================================================
+
+==============================================================================
+TAKEOVER SCREEN
+==============================================================================
+  A stock under an agreed all-cash bid is no longer equity: its price
+  is pinned to the offer, so its past volatility understates nothing -
+  it simply describes a different asset. Left in, the optimiser sees a
+  near-riskless stock and loads up on it.
+
+  ratio of Q4-2025 volatility to Jan-Sep 2025 volatility, 502 stocks screened
+  median ratio 0.82, 5th percentile 0.63
+
+      ticker    Jan-Sep vol    Q4 vol   ratio   Q4 return
+      DAY             49.0%      2.8%    0.06        1.6%  <- known deal
+      EA              37.3%      3.0%    0.08        5.5%  <- known deal
+      HOLX            32.6%     13.7%    0.42       39.8%  <- known deal
+      TTD             83.9%     36.8%    0.44      -93.7%
+      AAPL            36.3%     17.4%    0.48       27.7%
+      SRE             34.0%     16.7%    0.49       -0.4%
+      UNH             52.9%     26.4%    0.50      -11.6%
+      NDSN            30.2%     15.9%    0.53       25.3%
+
+  The three deals the group identified are the three lowest ratios and
+  the screen finds no fourth: after HOLX at 0.42 the next names have
+  Q4 volatilities of 30-40%, which is a quiet quarter, not a bid.
+  Excluded: DAY, EA, HOLX
+
+DAILY RETURN WINDOW (3 years to the trading date)
+  2023-01-05 to 2025-12-31, 750 days used of 752
+  investable after the takeover screen : 487
+  kept (>= 98% of days)          : 486
+      excluded: KVUE   667 of 752 days
+
+==============================================================================
+CONSISTENCY CHECK: does the portfolio have the beta its mu claims?
+==============================================================================
+  market volatility over the window : 14.92%
+
+  Ledoit-Wolf long-only portfolio
+      assigned beta (weighted average of the FF betas) : 1.093
+      realised beta (regression on the market)         : 0.530  (t = 34.3, R2 = 0.61)
+
+  The two disagree by a factor of two. mu says this portfolio carries
+  1.09 units of market risk and should be paid for them; its own
+  returns say it carries 0.53. The optimiser found stocks sitting in a
+  high-beta 5x5 cell whose individual covariance with the market is
+  low, and bought the discrepancy. That is an artefact of using coarse
+  portfolio betas in mu and fine stock-level covariances in Sigma, and
+  it is why the Ledoit-Wolf Sharpe ratio cannot be believed.
+
+==============================================================================
+SINGLE-INDEX COVARIANCE:  Sigma = sigma_m^2 beta beta' + D
+==============================================================================
+  betas                    : the same FF post-ranking betas as in mu
+  market variance          : 0.02226 (volatility 14.92%)
+  residual volatility      : mean 26.51%, min 14.94%, max 100.01%
+  condition number         : 565  (Ledoit-Wolf: 2,693)
+
+  CHECK: the unconstrained weights should be exactly proportional to
+  beta_i / residual variance_i (Sherman-Morrison on the rank-one term).
+      correlation with beta_i / resvar_i : 1.0000000000
+      largest absolute deviation         : 5.71e-16
+      -> they are the same portfolio, so the optimiser is only
+         trading each stock's beta against its own risk.
+
+      ticker      beta  resid vol   b/resvar    weight
+      BLK        1.083     15.31%      46.20    0.543%
+      TROW       1.596     18.69%      45.72    0.537%
+      MCO        1.210     16.61%      43.88    0.516%
+      MA         0.995     15.17%      43.24    0.508%
+      TEL        1.210     16.94%      42.18    0.496%
+      AME        1.326     18.23%      39.89    0.469%
+      ITW        0.931     15.51%      38.73    0.455%
+      HLT        1.210     17.72%      38.52    0.453%
+
+==============================================================================
+THE PORTFOLIOS
+==============================================================================
+
+                                       MAIN   single-index     robustness
+                               single-index  unconstrained    Ledoit-Wolf
+                               long-only 5%                  long-only 5%
+  ------------------------------------------------------------------------
+  expected excess return              8.77%          8.77%          9.07%
+  model volatility                   15.80%         15.80%          9.97%
+  model Sharpe ratio                  0.555          0.555          0.910
+  positions held                        486            486             50
+  largest weight                      0.54%          0.54%          5.00%
+  effective N                         396.6          396.6           29.3
+  gross exposure                       1.00           1.00           1.00
+  realised volatility                14.59%                        10.11%
+  assigned beta                       1.056          1.056          1.093
+  realised beta                       0.888                         0.530
+
+  Assigned minus realised beta: 0.17 for the main portfolio,
+  0.56 for the Ledoit-Wolf one. That gap, not the volatility,
+  is what separates them - both matrices predict their own portfolio's
+  volatility perfectly well, because both were fitted on these same 750
+  days. The difference is that the Ledoit-Wolf portfolio is *paid* for
+  1.09 units of market risk by mu while carrying 0.53 of them. Its
+  11.10% expected return is therefore not a return it can earn, and the
+  1.11 Sharpe ratio is the size of the inconsistency rather than a
+  reward. Under the single-index matrix that trade does not exist: mu
+  and Sigma are built from one set of betas, so a stock can only be
+  bought for its beta by also accepting the risk that beta implies.
+
+  The residual 0.17 gap is real and worth naming in the video: the FF
+  post-ranking betas come from monthly data over 2008-2025, while the
+  realised beta is measured on daily data over 2023-2025. The same
+  stock does not have the same beta in both.
+
+LARGEST POSITIONS, main portfolio
+      ticker     weight    beta    mu-rf  resid vol  total vol
+      BLK        0.543%   1.083    8.99%     15.31%     22.26%
+      TROW       0.537%   1.596   13.25%     18.69%     30.27%
+      MCO        0.516%   1.210   10.04%     16.61%     24.53%
+      MA         0.508%   0.995    8.26%     15.17%     21.23%
+      TEL        0.496%   1.210   10.04%     16.94%     24.76%
+      AME        0.469%   1.326   11.00%     18.23%     26.90%
+      ITW        0.455%   0.931    7.73%     15.51%     20.82%
+      HLT        0.453%   1.210   10.04%     17.72%     25.30%
+      XYL        0.442%   1.326   11.00%     18.77%     27.27%
+      GS         0.442%   1.353   11.22%     18.96%     27.69%
+      AMP        0.441%   1.210   10.04%     17.96%     25.47%
+      DOV        0.438%   1.083    8.99%     17.05%     23.50%
+      TJX        0.436%   0.995    8.26%     16.39%     22.11%
+      SPGI       0.430%   0.995    8.26%     16.49%     22.19%
+      ROP        0.428%   0.816    6.77%     14.96%     19.29%
+      ICE        0.426%   1.083    8.99%     17.29%     23.66%
+      WAB        0.424%   1.092    9.07%     17.40%     23.84%
+      IR         0.421%   1.583   13.14%     21.02%     31.62%
+      EMR        0.420%   1.353   11.23%     19.46%     28.04%
+      MS         0.416%   1.353   11.22%     19.55%     28.10%
+
+      beta group      weight   held     size group      weight   held
+      1               14.58%     99     1               18.32%     96
+      2               19.64%     93     2               18.83%     98
+      3               23.40%     99     3               20.12%     96
+      4               23.30%     95     4               21.25%     98
+      5               19.09%    100     5               21.48%     98
+
+  weighted ln(ME) 10.777 vs 10.720 equal-weighted
+
+WRITTEN
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\processed\covariance_single_index.csv
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\processed\covariance_ledoit_wolf.csv
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\processed\tangency_weights.csv
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\processed\portfolio_stats.csv

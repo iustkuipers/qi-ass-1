@@ -1,0 +1,130 @@
+==============================================================================
+STEP 3 - PRE-RANKING BETAS, 5x5 PORTFOLIOS, POST-RANKING BETAS
+==============================================================================
+
+FAMA-FRENCH FACTORS
+  rows dropped for being after 31-12-2025 : 7
+  months kept              : 240 (2006-01 to 2025-12)
+  sd of mktrf              : 0.0450  -> decimals, not percent
+  mean market excess return: 0.8462% per month
+  mean risk-free rate      : 0.1336% per month
+
+EXCESS RETURN PANEL
+  months x stocks          : 240 x 498
+  dropped share classes    : 6
+  period                   : 2006-01 to 2025-12
+
+BETA DEFINITION CHECK (pre-ranking betas at June 2025)
+  stocks compared          : 490
+  correlation excess vs raw: 0.999202
+  mean absolute difference : 0.015977
+  -> excess-on-excess and FF's raw-on-raw give the same beta; we use
+     excess for consistency with the step 4 regressions.
+
+JUNE SORTS (5 size groups x 5 pre-ranking beta groups)
+  FF years sorted          : 2008 to 2025
+  stock-years assigned     : 7,996
+
+        year  stocks  per cell  pre-beta min   median      max
+        2008     388      15.5         -1.30     1.01     4.14
+        2009     399      16.0         -0.43     1.06     6.04
+        2010     405      16.2         -0.31     1.07     5.48
+        2011     405      16.2         -0.15     1.05     5.04
+        2012     413      16.5         -0.04     1.03     4.62
+        2013     424      17.0         -0.08     1.04     4.67
+        2014     431      17.2         -0.51     1.03     3.64
+        2015     440      17.6         -0.82     1.00     3.25
+        2016     445      17.8         -0.70     0.97     3.03
+        2017     451      18.0         -1.30     0.90     3.72
+        2018     455      18.2         -0.89     0.92     3.44
+        2019     460      18.4         -0.81     0.94     4.05
+        2020     465      18.6         -0.71     1.01     3.34
+        2021     474      19.0         -0.78     0.97     2.85
+        2022     477      19.1         -1.01     0.97     3.43
+        2023     486      19.4         -0.78     0.99     3.56
+        2024     488      19.5         -0.72     1.02     4.27
+        2025     490      19.6         -0.23     0.94     4.65
+
+POST-RANKING PORTFOLIO RETURNS
+  portfolios               : 25 of 25
+  months                   : 2008-07 to 2025-12 (210 in the longest series)
+  stocks per portfolio     : median 18, min 15, max 20
+
+==============================================================================
+TABLE I - portfolios formed on size, then on pre-ranking beta
+  (Size 1 = smallest, Beta 1 = lowest pre-ranking beta)
+==============================================================================
+
+Panel A: average monthly excess return, in percent
+         Beta 1   Beta 2   Beta 3   Beta 4   Beta 5      All
+Size 1   1.697   1.597   2.144   2.054   2.645   2.027
+Size 2   1.164   1.185   1.033   1.291   1.938   1.322
+Size 3   0.719   1.053   1.220   1.064   1.365   1.084
+Size 4   0.731   0.934   1.008   1.059   1.287   1.004
+Size 5   0.652   0.840   0.965   1.112   1.182   0.950
+   All   0.993   1.122   1.274   1.316   1.683   1.278
+
+Panel B: post-ranking beta (sum of the current and lagged slopes)
+         Beta 1   Beta 2   Beta 3   Beta 4   Beta 5      All
+Size 1   0.771   1.028   1.011   1.291   1.432   1.107
+Size 2   0.639   0.839   0.922   1.083   1.596   1.016
+Size 3   0.707   0.851   1.092   1.326   1.583   1.112
+Size 4   0.554   0.816   0.931   1.210   1.353   0.973
+Size 5   0.646   0.751   0.995   1.083   1.353   0.965
+   All   0.663   0.857   0.990   1.199   1.463   1.034
+
+Panel C: average ln(market equity) in June
+         Beta 1   Beta 2   Beta 3   Beta 4   Beta 5      All
+Size 1   8.554   8.572   8.524   8.523   8.441   8.523
+Size 2   9.290   9.292   9.281   9.279   9.291   9.286
+Size 3   9.824   9.815   9.829   9.828   9.838   9.827
+Size 4  10.443  10.435  10.442  10.445  10.403  10.434
+Size 5  11.717  11.663  11.628  11.563  11.593  11.633
+   All   9.966   9.956   9.941   9.928   9.913   9.940
+
+Panel D: average pre-ranking beta at formation
+         Beta 1   Beta 2   Beta 3   Beta 4   Beta 5      All
+Size 1   0.336   0.807   1.093   1.410   2.029   1.135
+Size 2   0.276   0.695   0.970   1.288   1.994   1.044
+Size 3   0.204   0.680   1.005   1.345   1.967   1.040
+Size 4   0.242   0.704   0.988   1.265   1.785   0.997
+Size 5   0.302   0.648   0.916   1.175   1.729   0.954
+   All   0.272   0.706   0.994   1.297   1.901   1.034
+
+DOES THE DOUBLE SORT DO ITS JOB?
+  post-ranking beta, lowest to highest beta group (averaged over size):
+      Beta 1: 0.66  Beta 2: 0.86  Beta 3: 0.99  Beta 4: 1.20  Beta 5: 1.46
+  spread in post-ranking beta across beta groups : 0.80
+  spread in post-ranking beta across size groups : 0.15
+  spread in ln(ME) across size groups            : 3.11
+  spread in ln(ME) across beta groups            : 0.05
+
+==============================================================================
+TABLE II - is there a relation between beta and average return?
+==============================================================================
+
+  averaged over size groups, by post-ranking beta group:
+         group  post-beta  mean exret %     sd %  n months
+             1       0.66         0.993     4.13       210
+             2       0.86         1.122     4.59       210
+             3       0.99         1.274     5.13       210
+             4       1.20         1.316     6.07       210
+             5       1.46         1.683     7.47       210
+
+  averaged over beta groups, by size group:
+         group  post-beta  mean exret %   ln(ME)
+             1       1.11         2.027     8.52
+             2       1.02         1.322     9.29
+             3       1.11         1.084     9.83
+             4       0.97         1.004    10.43
+             5       0.97         0.950    11.63
+
+STOCK-LEVEL POST-RANKING BETAS (each stock gets its portfolio's beta)
+  stock-years with a beta  : 7,996
+  beta range               : 0.55 to 1.60
+  FF year 2025: 490 stocks, beta 0.55 to 1.60
+
+WRITTEN
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\processed\assignments.csv
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\processed\portfolio_returns.csv
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\processed\post_ranking_betas.csv

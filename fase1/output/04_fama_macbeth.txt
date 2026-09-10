@@ -1,0 +1,140 @@
+================================================================================
+STEP 4 - FAMA-MACBETH CROSS-SECTIONAL REGRESSIONS
+================================================================================
+
+REGRESSION PANEL
+  months                   : 2008-07 to 2025-12
+  stock-months             : 93,002
+  distinct stocks          : 490
+  with a beta              : 93,002
+  with ln(ME)              : 93,002
+  with ln(BE/ME)           : 89,450
+  financial firms          : 19,548 stock-months
+  negative book equity     : 3,240 stock-months
+
+================================================================================
+TABLE III - main (no financials, no negative BE)
+  average stocks per monthly cross-section: 335
+================================================================================
+
+  specification                   intercept       beta     ln(ME)   ln(BE/ME)   avg R2
+                                        (t)        (t)        (t)         (t)
+  ----------------------------------------------------------------------------------
+  (1) beta                            0.255      1.002                           0.047
+                                       0.83       2.27                       
+  (2) ln(ME)                          4.290                -0.309                0.016
+                                       5.42                 -5.42            
+  (3) beta + ln(ME)                   3.196      0.745     -0.276                0.060
+                                       5.23       1.71      -5.54            
+  (4) ln(BE/ME)                       1.125                            -0.126    0.020
+                                       3.21                             -1.60
+  (5) ln(ME) + ln(BE/ME)              4.175                -0.319      -0.168    0.035
+                                       5.37                 -5.72       -2.14
+  (6) beta + ln(ME) + ln(BE/ME)       3.100      0.726     -0.283      -0.149    0.078
+                                       5.25       1.67      -5.98       -1.95
+
+  Newey-West t-statistics (6 lags) for the full specification (6):
+      variable        mean %     FM t     NW t  % months > 0
+      intercept        3.100     5.25     5.25        70.00%
+      beta             0.726     1.67     1.73        52.86%
+      ln_me           -0.283    -5.98    -6.17        31.43%
+      ln_bm           -0.149    -1.95    -1.81        42.38%
+
+================================================================================
+TABLE III - robustness (financials included)
+  average stocks per monthly cross-section: 427
+================================================================================
+
+  specification                   intercept       beta     ln(ME)   ln(BE/ME)   avg R2
+                                        (t)        (t)        (t)         (t)
+  ----------------------------------------------------------------------------------
+  (1) beta                            0.327      0.905                           0.046
+                                       1.08       2.13                       
+  (2) ln(ME)                          4.126                -0.294                0.013
+                                       5.76                 -5.86            
+  (3) beta + ln(ME)                   3.084      0.729     -0.265                0.058
+                                       5.22       1.73      -5.73            
+  (4) ln(BE/ME)                       1.129                            -0.114    0.020
+                                       3.08                             -1.39
+  (5) ln(ME) + ln(BE/ME)              4.005                -0.299      -0.141    0.032
+                                       5.67                 -6.18       -1.75
+  (6) beta + ln(ME) + ln(BE/ME)       2.941      0.738     -0.268      -0.139    0.077
+                                       5.08       1.75      -6.04       -1.74
+
+  Newey-West t-statistics (6 lags) for the full specification (6):
+      variable        mean %     FM t     NW t  % months > 0
+      intercept        2.941     5.08     4.92        65.24%
+      beta             0.738     1.75     1.72        54.76%
+      ln_me           -0.268    -6.04    -6.16        33.33%
+      ln_bm           -0.139    -1.74    -1.61        44.29%
+
+================================================================================
+IS THE BETA PREMIUM THE MARKET PREMIUM?  (specification (1), main sample)
+================================================================================
+  The CAPM says two things: gamma_1 = E[mktrf] and gamma_0 = 0.
+
+  mean gamma_1 (beta slope)     :    1.002% per month   (t = 2.27)
+  mean mktrf, same months       :    0.972% per month
+  difference gamma_1 - mktrf    :    0.030% per month   (t = 0.10)
+
+  mean gamma_0 (intercept)      :    0.255% per month   (t = 0.83)
+  annualised                    :     3.11% per year
+
+  The difference is tested month by month, so the market's own variation
+  is removed from the standard error rather than left inside it.
+
+================================================================================
+WHERE DOES THE SURVIVORSHIP SHOW UP?
+================================================================================
+
+  1. In the level of returns, not in the slopes.
+     our universe, equal-weighted :   1.282% per month
+     the market (mktrf)           :   0.972% per month
+     difference                   :   0.310% per month (t = 3.90), 3.8% per year
+     Firms that were in the S&P 500 in December 2025 outperformed the
+     market over a period they were selected for having survived.
+
+  2. Not in the intercept of specification (6), which is misread easily.
+     intercept as reported above  :   3.100% per month  (a firm with ln(ME) = 0, i.e. worth $1m)
+     intercept with ln(ME) and ln(BE/ME) demeaned :   0.539% per month (t = 1.78)
+     The slopes are unchanged by demeaning; only the intercept moves,
+     because it is now evaluated at the average stock instead of at a
+     point far outside the sample.
+     slopes after demeaning: beta 0.726, ln(ME) -0.283, ln(BE/ME) -0.149
+
+  3. In the size slope, which is the one to treat with suspicion:
+     small S&P 500 firms of 2008 that are still in the index in 2025
+     are survivors twice over, so -0.28% per month per log point of
+     size is an upper bound on any real size premium.
+
+================================================================================
+SUBPERIODS (split at 2016-12) - main sample, specification (6)
+================================================================================
+  early: 2008-07 to 2016-12 (102 months)
+  late : 2017-01 to 2025-12 (108 months)
+
+      variable        early %       t     late %       t   difference
+      intercept         4.286    5.91      1.980    2.17       -2.306
+      beta              0.272    0.44      1.156    1.91        0.884
+      ln_me            -0.356   -5.58     -0.214   -3.09        0.142
+      ln_bm            -0.147   -1.50     -0.152   -1.30       -0.005
+
+================================================================================
+THE SPECIFICATION STEP 5 WILL DRAW mu FROM
+  beta + ln(ME) + ln(BE/ME) + D(BE<0), financials excluded,
+  negative-BE firms kept with ln(BE/ME) set to zero.
+================================================================================
+
+      variable            mean %     FM t     NW t     sd %
+      intercept            3.268     5.62     5.82    8.424
+      beta                 0.710     1.66     1.72    6.211
+      ln_me               -0.299    -6.36    -6.77    0.681
+      ln_bm               -0.156    -2.07    -1.93    1.091
+      neg_be_dummy         0.639     2.42     2.51    3.824
+      months: 210, average stocks per month: 350, average R2: 0.079
+      negative-BE stock-months kept: 3,000
+
+WRITTEN
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\processed\fm_slopes_mu_spec.csv
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\processed\fm_slopes_spec6_main.csv
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\processed\fm_summary.csv

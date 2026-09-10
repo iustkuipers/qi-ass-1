@@ -1,0 +1,83 @@
+======================================================================
+SUMMARY NUMBERS - Part 1, Fama & French (1992)
+======================================================================
+generated from the processed files; trade date 31-12-2025
+
+DATA
+  firms in the hand-in sheet          : 504
+  sheet rows (HST listed twice)       : 505
+  monthly panel                       : 2006-01 to 2025-12, 240 months
+  daily panel                         : 2016-01 to 2025-12
+  Compustat fiscal years              : 2004 to 2025
+  long factor history                 : 1926-07 to 2025-12 (1194 months)
+
+STEP 3 - BETAS
+  first June sort                     : 2008
+  post-ranking months                 : 2008-07 to 2025-12 (210)
+  portfolios                          : 25 (5 size x 5 beta)
+  post-ranking beta, lowest group     : 0.66
+  post-ranking beta, highest group    : 1.46
+  spread in beta across beta groups   : 0.80
+  spread in ln(ME) across beta groups : 0.05
+
+STEP 4 - FAMA-MACBETH (main sample, specification 6)
+  beta                                :   0.726% per month  (t = 1.67)
+  ln(ME)                              :  -0.283% per month  (t = -5.98)
+  ln(BE/ME)                           :  -0.149% per month  (t = -1.95)
+  gamma_1 in the beta-only regression : 1.002% per month
+  mean mktrf over the same months     : 0.972% per month
+  difference gamma_1 - mktrf          : 0.030% (t = 0.10)
+  survivorship: universe vs market    : 0.310% per month
+
+STEP 5 - EXPECTED RETURNS
+  rule                                : E[r] - rf = MRP x beta
+  MRP, long-run mean mktrf            : 0.6916% per month = 8.30% per year (t = 4.50)
+  risk-free rate (given)              : 1.00% per year
+  distinct expected returns           : 25 (one per 5x5 cell)
+  expected excess return range        : 4.60% to 13.25%
+
+STEP 6 - COVARIANCE AND PORTFOLIO
+  covariance                          : single index, Sigma = sigma_m^2 beta beta' + D
+  daily window                        : 2023-01-05 to 2025-12-31, 750 days
+  market volatility                   : 14.92%
+  stocks in the portfolio             : 486
+  weight cap                          : 5% (never binds)
+  largest weight                      : 0.543%
+  effective N                         : 396.6
+  expected excess return              : 8.77%
+  volatility                          : 15.80%
+  Sharpe ratio                        : 0.555
+  assigned beta                       : 1.056
+  realised beta (daily regression)    : 0.888
+  Ledoit-Wolf robustness, Sharpe      : 0.910
+  Ledoit-Wolf robustness, realised beta : 0.530
+
+STEP 7 - ALLOCATION
+  risk aversion A                     : 4
+  y* = (E[r]-rf)/(A sigma^2)          : 0.878 raw, 0.878 used
+  positions held                      : 486
+  invested in stocks                  : EUR 8,725,445.51
+  risk-free holding                   : EUR 1,274,554.49
+  TOTAL                               : EUR 10,000,000.00
+  budget                              : EUR 10,000,000.00
+  balanced exactly                    : True
+  largest position                    : EUR 47,094.96 (0.471%)
+
+  ten largest positions
+      BLK          44 shares  EUR   47,094.96   0.471%
+      TROW        460 shares  EUR   47,094.80   0.471%
+      MCO          88 shares  EUR   44,954.80   0.450%
+      MA           78 shares  EUR   44,528.64   0.445%
+      TEL         191 shares  EUR   43,454.41   0.435%
+      AME         200 shares  EUR   41,062.00   0.411%
+      ITW         162 shares  EUR   39,900.60   0.399%
+      HLT         138 shares  EUR   39,640.50   0.396%
+      XYL         285 shares  EUR   38,811.30   0.388%
+      GS           44 shares  EUR   38,676.00   0.387%
+
+EXCLUSIONS (504 -> 486 investable)
+  6  second share class          FOX GOOG LEN MKC NWS TAP
+  6  under 24 months of history  GEV PSKY Q SNDK SOLV SW
+  2  no 2025 pre-ranking beta    CRH VLTO
+  3  pending cash takeover       DAY EA HOLX
+  1  partial daily history       KVUE

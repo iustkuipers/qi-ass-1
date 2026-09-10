@@ -1,0 +1,86 @@
+==============================================================================
+STEP 7 - CAPITAL ALLOCATION AND HAND-IN SHEET
+==============================================================================
+
+THE RISKY PORTFOLIO (from step 6, single-index, long-only)
+  stocks                   : 486
+  expected excess return   : 8.77%
+  volatility               : 15.80%
+  Sharpe ratio             : 0.555
+
+==============================================================================
+HOW MUCH TO INVEST:  y* = (E[r] - rf) / (A sigma^2)
+==============================================================================
+
+         A    y* raw   y* used      risky EUR   risk-free EUR     E[r]      vol
+         3     1.170     1.000     10,000,000               0    9.77%   15.80%
+         4     0.878     0.878      8,778,502       1,221,498    8.69%   13.87%   <- chosen
+         5     0.702     0.702      7,022,802       2,977,198    7.16%   11.10%
+
+  At A = 4 the investor wants 87.8% in the risky portfolio and 12.2% at the risk-free rate.
+
+==============================================================================
+ROUNDING TO WHOLE SHARES
+==============================================================================
+  positions with at least one share : 486
+  positions rounded down to zero    : 0
+  invested in stocks                : EUR   8,725,445.51
+  deliberate risk-free holding      : EUR   1,221,497.68
+  cash left over by rounding        : EUR      53,056.81
+  total risk-free                   : EUR   1,274,554.49
+  TOTAL                             : EUR  10,000,000.00
+  budget                            : EUR  10,000,000.00
+  difference                        : EUR           0.00
+  largest single position           : EUR      47,094.96 (0.471%)
+  smallest position held            : EUR       1,266.06
+
+  Positions are rounded DOWN, never to nearest: rounding to nearest can
+  spend more than EUR 10 million, and the budget is fixed. The cash that
+  rounding leaves behind is not wasted - it earns the 1% risk-free rate.
+
+THE PORTFOLIO WE ACTUALLY HOLD (after rounding)
+  share of budget in stocks : 0.8725
+  risky-book excess return  : 8.77%
+  risky-book volatility     : 15.80%
+  risky-book Sharpe         : 0.555
+  total expected return     : 8.65%
+  total volatility          : 13.79%
+  largest drift from target : 0.0226% of the budget
+
+LARGEST POSITIONS
+      ticker      shares     price     value EUR   weight
+      BLK             44   1070.34     47,094.96   0.471%
+      TROW           460    102.38     47,094.80   0.471%
+      MCO             88    510.85     44,954.80   0.450%
+      MA              78    570.88     44,528.64   0.445%
+      TEL            191    227.51     43,454.41   0.435%
+      AME            200    205.31     41,062.00   0.411%
+      ITW            162    246.30     39,900.60   0.399%
+      HLT            138    287.25     39,640.50   0.396%
+      XYL            285    136.18     38,811.30   0.388%
+      GS              44    879.00     38,676.00   0.387%
+      DOV            196    195.24     38,267.04   0.383%
+      AMP             78    490.34     38,246.52   0.382%
+      TJX            248    153.61     38,095.28   0.381%
+      SPGI            72    522.59     37,626.48   0.376%
+      ROP             84    445.13     37,390.92   0.374%
+
+==============================================================================
+HAND-IN SHEET
+==============================================================================
+  written to               : C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\output\Hand_in_sheet_part1.xlsx
+  column                   : H (shares held, Part I)
+  firm rows with a holding : 486
+  risk-free cell           : H21 = EUR 1,274,554.49  (its price is 1, so the cell is the amount)
+  HST duplicate row        : shares on the first line, 0 on the second
+
+  The template's subtotal formulas stop two rows short of the firm
+  block, silently omitting ZBRA and ZTS. All three parts share this
+  sheet, so all three are repaired:
+      I16: =SUM(I22:I524)  ->  =SUM(I22:I526)
+      L16: =SUM(L22:L524)  ->  =SUM(L22:L526)
+      O16: =SUM(O22:O524)  ->  =SUM(O22:O526)
+
+WRITTEN
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\output\allocation.csv
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\output\Hand_in_sheet_part1.xlsx

@@ -1,0 +1,88 @@
+========================================================================
+STEP 2 - BOOK EQUITY, MARKET EQUITY AND B/M
+========================================================================
+
+COMPUSTAT (CRSP/Compustat Merged, Fundamentals Annual)
+  rows as delivered        : 9,887
+  after LINKPRIM in (P, C) : 9,789
+  rows dated after 31-12-2025 (dropped) : 71
+  rows used                : 9,718
+  non-USD rows             : 0
+  latest datadate kept     : 2025-12-31
+  one row per (PERMNO, fiscal year) : yes (checked, would raise otherwise)
+  universe firms with accounting data : 496 of 504
+  NO Compustat row at all:
+      DAY    17700  DAYFORCE INC
+      ETN    11762  EATON CORP PLC
+      FOX    18421  FOX CORP
+      GOOG   14542  ALPHABET INC
+      LEN    89731  LENNAR CORP
+      MKC    89155  MCCORMICK & CO INC
+      NWS    13964  NEWS CORP NEW
+      TAP    90562  MOLSON COORS BEVERAGE CO
+
+BOOK EQUITY (Davis, Fama & French)
+  rows with a BE value     : 9,718 of 9,718
+  stockholders' equity from SEQ        : 9,718
+  ... from CEQ + PSTK (SEQ missing)    : 0
+  ... from AT - LT (SEQ and CEQ missing): 0
+  deferred taxes from TXDITC           : 8,434
+  ... TXDITC missing, TXDB/ITCB used   : 1,254
+  ... neither, treated as zero         : 30
+  preferred stock from PSTKRV          : 9,715
+  negative or zero BE                  : 338
+  financial firms (SICH 6000-6999)     : 2,038 rows, 103 firms
+  firms ever showing negative BE       : 67
+  most persistent: DPZ (22y), AZO (17y), HCA (14y), SBAC (14y), PM (14y), VRSN (13y), TDG (12y), YUM (11y)
+  negative BE in the fiscal year that feeds the Dec-2025 portfolio: 30
+      AZO, BA, BKNG, CAH, CCI, DELL, DPZ, FICO, HCA, HLT, HPQ, IRM, LOW, MAR, MAS, MCD, MCK, MSCI, MTCH, MTD, ORLY, OTIS, PM, SBAC, SBUX, STX, TDG, VRSN, WYNN, YUM
+
+CHARACTERISTICS (one row per PERMNO per FF year, July t - June t+1)
+  rows                     : 9,067
+  FF years                 : 2006 to 2025
+
+  firms with a usable B/M, per FF year
+        year  in panel  has ME  has BE  has B/M  neg BE  financial
+        2006       391     391     383        0       4         79
+        2007       400     400     388      383       5         80
+        2008       408     408     399      396       3         84
+        2009       408     408     404      394      10         85
+        2010       415     415     407      398       9         86
+        2011       426     426     417      412       5         89
+        2012       433     433     425      416       9         90
+        2013       442     442     432      423       9         91
+        2014       450     450     440      430      10         90
+        2015       454     454     445      432      13         96
+        2016       459     459     452      435      17         96
+        2017       466     466     455      441      14         97
+        2018       469     469     461      445      16         98
+        2019       480     479     465      446      18         99
+        2020       483     483     472      450      21         99
+        2021       491     491     479      455      24         99
+        2022       494     494     484      461      23        102
+        2023       496     496     486      453      33        102
+        2024       500     500     490      460      30        100
+        2025       502     502     493      463      30        100
+
+EXAMPLES (FF year 2025: size from June-2025, BE from FY2024, ME from Dec-2024)
+      ticker      ME Jun25     ME Dec24      BE FY24     B/M   ln(ME)    fisc.  fin
+      NVDA       3,852,990    3,288,762       43,440   0.013    15.16  2024-01 False
+      AAPL       3,048,154    3,766,500       57,247   0.015    14.93  2024-09 False
+      JPM          805,687      674,865      324,708   0.481    13.60  2024-12 True
+      XOM          464,579      472,780      302,747   0.640    13.05  2024-12 False
+      KO           304,527      268,203       27,325   0.102    12.63  2024-12 False
+      T            208,241      163,381      163,311   1.000    12.25  2024-12 False
+      F             42,377       38,644       45,909   1.188    10.65  2024-12 False
+
+  B/M distribution in FF year 2025 (positive BE only)
+       count:    463.000
+         min:      0.005
+          5%:      0.044
+         25%:      0.136
+         50%:      0.286
+         75%:      0.558
+         95%:      0.954
+         max:      1.604
+
+WRITTEN
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\processed\characteristics.csv

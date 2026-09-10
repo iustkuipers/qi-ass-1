@@ -1,0 +1,34 @@
+# --- licensed data must never leave this machine -------------------------
+# WRDS (CRSP, Compustat) and the Ken French factor files are licensed to the
+# VU. Publishing them on GitHub would breach that licence, so every path they
+# can arrive on is ignored here, not just the ones we happen to use today.
+# NOTE: a pattern like "data/raw/" contains a slash and is therefore anchored
+# to this file's directory - it would NOT match fase1/data/raw/. The leading
+# **/ is what makes these match at any depth.
+**/data/raw/
+**/data/processed/
+**/data/interim/
+*.parquet
+data2025.csv
+*.csv.gz
+
+# The course-supplied inputs are not ours to redistribute either.
+Hand_in_sheet.xlsx
+WRDS_firmlist_2025_photo.png
+empirical_assignment.pdf
+w1/
+w2/
+
+# --- generated ------------------------------------------------------------
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- editors and OS -------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,76 @@
+========================================================================
+STEP 1 - DATA LOADING AND CHECKS
+========================================================================
+
+UNIVERSE (from Hand_in_sheet.xlsx)
+  sheet rows read          : 505
+  unique firms (PERMNO)    : 504
+  expected                 : 504
+  repeated line            : HST (PERMNO 46703) on sheet rows 253 and 254
+  dual share classes       : 6 companies, 12 tickers
+      PERMCO    33 MOLSON COORS BEVERAGE CO     TAP (59248, cusip 60871R20), TAP (90562, cusip 60871R10)
+      PERMCO  2801 MCCORMICK & CO INC           MKC (52090, cusip 57978020), MKC (89155, cusip 57978010)
+      PERMCO 21095 LENNAR CORP                  LEN (52708, cusip 52605710), LEN (89731, cusip 52605730)
+      PERMCO 45483 ALPHABET INC                 GOOG (14542, cusip 02079K10), GOOGL (90319, cusip 02079K30)
+      PERMCO 54433 NEWS CORP NEW                NWS (13964, cusip 65249B20), NWSA (13963, cusip 65249B10)
+      PERMCO 56662 FOX CORP                     FOX (18421, cusip 35137L20), FOXA (18420, cusip 35137L10)
+
+CRSP MONTHLY PANEL
+  file                     : bcpgjo4rlef1u4js.csv
+  rows                     : 109,132
+  columns                  : permno, cusip, ticker, permco, siccd, date, price, mktcap, ret, shrout
+  date range               : 2006-01-31 to 2025-12-31
+  distinct PERMNOs         : 504
+  returns as text codes    : 0
+  returns as -66/-77/-88/-99: 0
+  missing returns in total : 23 (0.02%)
+  rows after 2025-12-31   : 0
+  duplicate (PERMNO, date) : 600 rows, on 129 PERMNOs
+  -> exact copies, dropped : 306 (109,132 -> 108,826 rows)
+  universe firms present   : 504 of 504
+  monthly obs per firm     : min 2, median 240, max 240
+  firms with < 24 months   : 6
+  firms with < 60 months   : 16
+  firms with internal gaps : 0
+
+CRSP DAILY PANEL
+  file                     : ehb4ajjl6dbtwwj8.csv
+  rows                     : 1,216,471
+  columns                  : permno, SecInfoStartDt, cusip, ticker, permco, date, ret
+  date range               : 2016-01-04 to 2025-12-31
+  distinct PERMNOs         : 504
+  returns as text codes    : 0
+  returns as -66/-77/-88/-99: 0
+  missing returns in total : 397 (0.03%)
+  rows after 2025-12-31   : 0
+  duplicate (PERMNO, date) : 231 rows, on 26 PERMNOs
+  -> exact copies, dropped : 119 (1,216,471 -> 1,216,352 rows)
+  universe firms present   : 504 of 504
+  daily obs per firm       : min 40, median 2514, max 2514
+  firms with internal gaps : 0
+
+SHORT HISTORIES (matters for the pre-ranking betas in step 3)
+      Q         2 months, from 2025-11  QNITY ELECTRONICS INC  <- under 24 months
+      PSKY      5 months, from 2025-08  PARAMOUNT SKYDANCE CORP  <- under 24 months
+      SNDK     11 months, from 2025-02  SANDISK CORP  <- under 24 months
+      SW       18 months, from 2024-07  SMURFIT WESTROCK PLC  <- under 24 months
+      SOLV     21 months, from 2024-04  SOLVENTUM CORP  <- under 24 months
+      GEV      21 months, from 2024-04  G E VERNOVA INC  <- under 24 months
+      VLTO     27 months, from 2023-10  VERALTO CORP
+      CRH      28 months, from 2023-09  C R H PLC NEW
+      KVUE     32 months, from 2023-05  KENVUE INC
+      GEHC     36 months, from 2023-01  G E HEALTHCARE TECHNOLOGIES INC
+      WBD      45 months, from 2022-04  WARNER BROS DISCOVERY INC
+      CEG      47 months, from 2022-02  CONSTELLATION ENERGY CORP
+      HOOD     54 months, from 2021-07  ROBINHOOD MARKETS INC
+      COIN     57 months, from 2021-04  COINBASE GLOBAL INC
+      APP      57 months, from 2021-04  APPLOVIN CORP
+      EXE      59 months, from 2021-02  EXPAND ENERGY CORP
+
+TRADING PRICES (sheet vs CRSP, 31-12-2025)
+  firms where the sheet price differs by > 0.01 : 0
+
+WRITTEN
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\processed\universe.csv
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\processed\monthly.parquet
+  C:\Users\Iust\OneDrive\Documenten\Quantitative Finance\p1 qi\assignment\fase1\data\processed\daily.parquet
