@@ -604,6 +604,65 @@ EA 0,08, HOLX 0,42, en daarna TTD op 0,44 met een absolute Q4-volatiliteit van
   bij een lange-termijnpremie van bijvoorbeeld 8% wordt y* bij A = 4 ongeveer
   0,85 in plaats van 1, en dan komt er wél een bewuste risicovrije positie bij.
 
+### Prompt 10 — lange MRP, README en publicatie op GitHub
+
+> famafrench_long.csv staat in data/raw. Draai 05 t/m 07 opnieuw met de lange-termijn mktrf ...
+> (t/m 2025-12) als MRP, A = 4. Repareer ook L16 en O16 in het sheet (tot rij 526).
+>
+> Daarna README.md in de root:
+> - vul alle ⟨…⟩ in met de nieuwe getallen uit output/summary_numbers.txt
+> - pas de mappenstructuur aan zodat die klopt met de echte repo
+>
+> Dan pushen naar https://github.com/iustkuipers/qi-ass-1.git:
+> - .gitignore met data/raw/, data/processed/, *.parquet, .venv/, __pycache__/
+>   (WRDS-data mag NIET op GitHub)
+> - requirements.txt toevoegen
+> - check git status voor de commit dat er geen data in zit
+> - commit en push naar main
+> -voeg een uitgebreide readme toe zodat mijn teamgenoten begrijpen wat we gedaan hebben zeg ook welk ebeslissingen ik genakat heb en welke jij
+
+**De lange MRP.** 1926-07 t/m 2025-12, 1194 maanden: gemiddelde mktrf 0,6916%
+per maand ofwel **8,30% per jaar** (t = 4,50), tegen 10,15% in de
+2006-2025-steekproef. Zoals voorspeld veranderen de gewichten niet, maar y* bij
+A = 4 zakt van 1,074 (afgekapt op 1) naar **0,878**, en daarmee komt er een
+echte risicovrije positie van EUR 1.221.498 bij. Eindstand: EUR 8.725.445,51 in
+aandelen en EUR 1.274.554,49 risicovrij, samen exact EUR 10.000.000,00.
+
+**Een gat in de testsuite dat de AI zelf opmerkte.** Er was geen testbestand
+voor module 4, terwijl dat de kern van de Fama-MacBeth-methode is. Toegevoegd:
+14 tests die de gemiddelde slope terugvinden uit een panel met een bekende
+werkelijke helling, controleren dat een maand met te weinig aandelen wordt
+overgeslagen in plaats van gefit, en dat de FM-t gelijk is aan gemiddelde /
+standaardfout. Daarbij kwam ook een 0/0-situatie boven water: als de
+verschilreeks gamma_1 − mktrf helemaal geen variatie heeft, gaf de t-waarde
+`nan`, wat eruitziet als een mislukte berekening in plaats van als "geen
+verschil". Nu 0. Totaal **111 tests**.
+
+**De .gitignore werkte eerst niet, en de check die wij eisten heeft dat gevangen.**
+Een patroon als `data/raw/` bevat een schuine streep en is daardoor verankerd aan
+de map waarin `.gitignore` staat; het matcht dus `<root>/data/raw/` maar **niet**
+`fase1/data/raw/`. Bij de eerste `git add -A` stonden alle WRDS-bestanden klaar
+om gecommit te worden — compustat.csv (38 MB), de twee CRSP-bestanden (68 en
+8 MB) en alle verwerkte panels. Opgelost met `**/data/raw/` en
+`**/data/processed/`, waarna de commit uit 39 bestanden bestaat met als grootste
+73 KB. Na de push nog eens tegen de remote gecontroleerd: geen raw, processed,
+parquet of data2025 aanwezig.
+
+**Wat er wél op GitHub staat en waarom.** De code, de tests, de rapporten in
+`output/`, dit promptbestand, en de twee deliverables in `data/output/`
+(`allocation.csv` en het ingevulde hand-in sheet). Die laatste twee bevatten de
+slotkoersen van één dag, wat publieke informatie is; de gelicentieerde
+CRSP-panels staan er niet in. De collegehandouts (`w1/`, `w2/`), de
+opdracht-PDF en het lege hand-in sheet zijn ook uitgesloten, omdat dat
+cursusmateriaal is dat niet van ons is om te verspreiden.
+
+**README.md** is opnieuw geschreven: het eindresultaat, hoe je het draait, de
+echte mappenstructuur, de methode per stap met de tabellen, en een sectie
+"Who decided what" waarin per beslissing staat of wij of de AI hem heeft
+genomen, plus de fouten die de AI in eigen werk vond.
+
+Commit `f67712c` op `main`, gepusht naar `https://github.com/iustkuipers/qi-ass-1`.
+
 ---
 
 *Dit bestand wordt bijgewerkt tot het moment van inleveren.*
